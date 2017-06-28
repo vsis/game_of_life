@@ -1,4 +1,4 @@
-require_relative "gmap"
+require_relative "../../src/gmap"
 require "test/unit"
 
 class TestGmap < Test::Unit::TestCase
@@ -167,6 +167,35 @@ class TestGmap < Test::Unit::TestCase
         test_map.set_cell(true, 0, 0)
         assert_equal(true, test_map.cell(0, 0))
         assert_equal(false, test_map.next_cell(0, 0))
+    end
+
+    def tests_change_cell_2x2
+        test_map = Gmap.new(2, 2)
+        assert_equal(false, test_map.cell(0, 0))
+        assert_equal(false, test_map.cell(0, 1))
+        assert_equal(false, test_map.cell(1, 0))
+        assert_equal(false, test_map.cell(1, 1))
+        test_map.change_cell(0, 0)
+        assert_equal(true, test_map.cell(0, 0))
+        assert_equal(false, test_map.cell(0, 1))
+        assert_equal(false, test_map.cell(1, 0))
+        assert_equal(false, test_map.cell(1, 1))
+        test_map.change_cell(0, 0)
+        assert_equal(false, test_map.cell(0, 0))
+        assert_equal(false, test_map.cell(0, 1))
+        assert_equal(false, test_map.cell(1, 0))
+        assert_equal(false, test_map.cell(1, 1))
+    end
+
+    def tests_get_diff_2x2
+        test_map = Gmap.new(2, 2)
+        test_map.set_cell(true, 0, 0)
+        test_map.next_generation
+        diff = test_map.get_diff
+        assert_equal([[0,0]], diff)
+        test_map.next_generation
+        diff = test_map.get_diff
+        assert_equal([], diff)
     end
 end
 
