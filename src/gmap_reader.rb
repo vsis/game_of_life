@@ -15,14 +15,14 @@ class GmapReader
                 @lines << line
             end
         end
-        raise "Empty map" if @lines.length == 0
+        raise EmptyMapError.new() if @lines.length == 0
     end
 
     def _fill_bool_map
         number_of_lines = @lines.length
         number_of_cols = @lines[0].length
         @lines.each do |line|
-            raise "Rows have different number of columns" if line.length != number_of_cols
+            raise BadNumberOfColsError.new("Rows have different number of columns") if line.length != number_of_cols
             row = []
             line.each_char do |cell|
                 if cell == "0"
@@ -32,7 +32,7 @@ class GmapReader
                 elsif cell == "\n"
                     
                 else
-                    raise "Unexpected element in cell:#{cell}"
+                    raise UnexpectedCellError.new("Unexpected cell:#{cell}")
                 end
             end
             @bool_map << row
@@ -50,4 +50,13 @@ class GmapReader
         end
         return map
     end
+end
+
+class EmptyMapError < StandardError
+end
+
+class UnexpectedCellError < StandardError
+end
+
+class BadNumberOfColsError < StandardError
 end
