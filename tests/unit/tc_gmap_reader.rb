@@ -6,6 +6,8 @@ class TestGmapReader < Test::Unit::TestCase
         file_path = "tests/glider.map"
         glider_loader = GmapReader.new(file_path)
         glider = glider_loader.get_map
+        assert_equal(5, glider.rows)
+        assert_equal(5, glider.cols)
         assert_equal(false, glider.cell(0, 0))
         assert_equal(false, glider.cell(0, 1))
         assert_equal(false, glider.cell(0, 2))

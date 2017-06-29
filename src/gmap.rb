@@ -7,6 +7,14 @@ class Gmap
         @next_map = Array.new(array_length, false)
     end
 
+    def rows
+        return @rows
+    end
+
+    def cols
+        return @cols
+    end
+
     def _swap()
         temporary = @current_map
         @current_map = @next_map

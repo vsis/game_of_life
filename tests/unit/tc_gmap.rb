@@ -197,5 +197,19 @@ class TestGmap < Test::Unit::TestCase
         diff = test_map.get_diff
         assert_equal([], diff)
     end
-end
 
+    def test_correct_number_of_rows_and_cols
+        test_map = Gmap.new(2, 2)
+        assert_equal(2, test_map.rows)
+        assert_equal(2, test_map.cols)
+        test_map = Gmap.new(5, 5)
+        assert_equal(5, test_map.rows)
+        assert_equal(5, test_map.cols)
+        test_map = Gmap.new(3, 6)
+        assert_equal(3, test_map.rows)
+        assert_equal(6, test_map.cols)
+        test_map = Gmap.new(4, 1)
+        assert_equal(4, test_map.rows)
+        assert_equal(1, test_map.cols)
+    end
+end
