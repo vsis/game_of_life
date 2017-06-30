@@ -87,7 +87,7 @@ class Gmap
         counter += 1 if cell(i - 1, j)
         counter += 1 if cell(i - 1, j - 1)
         is_alive = cell(i, j)
-        can_keep_alive = (counter == 2) or (counter == 3)
+        can_keep_alive = (counter == 2 or counter == 3)
         can_be_born = (counter == 3)
         if is_alive
             return can_keep_alive
