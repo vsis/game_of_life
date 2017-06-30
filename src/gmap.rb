@@ -15,6 +15,14 @@ class Gmap
         return @cols
     end
 
+    def get_alive_cells
+        counter = 0
+        @current_map.each do |cell|
+            counter += 1 if cell
+        end
+        return counter
+    end
+
     def _swap()
         temporary = @current_map
         @current_map = @next_map

@@ -212,4 +212,17 @@ class TestGmap < Test::Unit::TestCase
         assert_equal(4, test_map.rows)
         assert_equal(1, test_map.cols)
     end
+
+    def test_get_alive_cells
+        test_map = Gmap.new(2, 2)
+        assert_equal(0, test_map.get_alive_cells)
+        test_map.set_cell(true, 0, 0)
+        assert_equal(1, test_map.get_alive_cells)
+        test_map.set_cell(true, 0, 1)
+        assert_equal(2, test_map.get_alive_cells)
+        test_map.set_cell(true, 1, 0)
+        assert_equal(3, test_map.get_alive_cells)
+        test_map.set_cell(true, 1, 1)
+        assert_equal(4, test_map.get_alive_cells)
+    end
 end
