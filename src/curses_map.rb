@@ -49,7 +49,7 @@ class CursesMap
     end
 
     def print_footer(message)
-        Curses.setpos(@screen_rows, 0)
+        Curses.setpos(@screen_rows - 1, 0)
         Curses.clrtoeol
         Curses.addstr(message)
     end
