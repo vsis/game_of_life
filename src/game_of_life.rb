@@ -7,15 +7,25 @@ def main(map_file)
     screen.init_screen
     map_cols = screen.get_map_cols
     map_rows = screen.get_map_rows
+    generation = 0
     map_loader = GmapReader.new(map_file)
     map = map_loader.get_map(map_rows, map_cols)
-    print_all_map(map, screen)
-    screen.update
     while true
+        print_generation(map, screen, generation)
         map.next_generation
-        print_diff(map, screen)
-        screen.update
+        generation += 1
     end
+end
+
+def print_generation(map, screen, generation)
+    if generation != 0
+        print_diff(map, screen)
+    else
+        print_all_map(map, screen)
+    end
+    message = get_footer(generation, map.get_alive_cells, map.rows, map.cols)
+    screen.print_footer(message)
+    screen.update
 end
 
 def print_all_map(map, screen)
