@@ -39,9 +39,7 @@ class GmapReader
         end
     end
 
-    def get_map
-        rows = @bool_map.length
-        cols = @bool_map[0].length
+    def get_map(rows=@bool_map.length, cols=@bool_map[0].length)
         map = Gmap.new(rows, cols)
         @bool_map.each_with_index do |row, i|
             row.each_with_index do |cell, j|
