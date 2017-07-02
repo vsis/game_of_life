@@ -1,5 +1,6 @@
 require "curses"
 
+
 class CursesMap
 
     def initialize
@@ -12,8 +13,20 @@ class CursesMap
     def init_screen
         Curses.init_screen
         Curses.noecho
+        Curses.start_color
+        Curses.init_pair(1, Curses::COLOR_BLACK, Curses::COLOR_GREEN)
+        Curses.init_pair(2, Curses::COLOR_CYAN, Curses::COLOR_BLACK)
         @screen_rows = Curses.lines
         @screen_cols = Curses.cols
+    end
+
+    def init_footer
+        Curses.attron(Curses.color_pair(1))
+        @screen_cols.times do |col|
+            Curses.setpos(@screen_rows - 1, col)
+            Curses.addstr(" ")
+        end
+        Curses.attron(Curses.color_pair(2))
     end
 
     def get_map_rows
@@ -49,8 +62,9 @@ class CursesMap
     end
 
     def print_footer(message)
+        Curses.attron(Curses.color_pair(1))
         Curses.setpos(@screen_rows - 1, 0)
-        Curses.clrtoeol
         Curses.addstr(message)
+        Curses.attron(Curses.color_pair(2))
     end
 end
