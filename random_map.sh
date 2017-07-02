@@ -16,5 +16,5 @@ fi
 
 for i in $(seq $rows)
 do
-    cat /dev/urandom | tr -dc "0123" | tr "23" "0" | head -c $cols && printf "\n"
+    cat /dev/urandom | tr -dc "012345" | tr "2345" "0" | head -c $cols && printf "\n"
 done
