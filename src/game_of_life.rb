@@ -10,10 +10,13 @@ def main(map_file)
     generation = 0
     map_loader = GmapReader.new(map_file)
     map = map_loader.get_map(map_rows, map_cols)
+    screen.init_footer
+    nodelay = false
     while true
         print_generation(map, screen, generation)
         map.next_generation
         generation += 1
+        nodelay = catch_keyboard(nodelay)
     end
 end
 
@@ -50,10 +53,26 @@ def print_diff(map, screen)
 end
 
 def get_footer(generation, alive_cells, rows, cols)
-    message = "Generation: #{generation} "
-    message += "Cells: #{alive_cells} "
-    message += "Map Size: #{rows}X#{cols}"
+    message = "Generation: #{generation} | "
+    message += "Cells: #{alive_cells} | "
+    message += "Map Size: #{rows}X#{cols} |       "
     return message
+end
+
+def catch_keyboard(nodelay)
+    input_key = Curses.stdscr.getch
+    result = nodelay
+    if input_key == " "
+        result = !result
+        Curses.stdscr.nodelay = result
+    elsif input_key == "n"
+        return result
+    elsif input_key == "q"
+        exit 0
+    elsif !nodelay
+        return catch_keyboard(nodelay)
+    end
+    return result
 end
 
 if __FILE__ == $0
