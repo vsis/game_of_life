@@ -5,15 +5,15 @@ It's part of my process of learning Ruby
 
 ## How to execute it
 
-To generate a random universe and start the game, run: `./play.sh`
+To generate a random universe and start the game, run: `./play.sh`.
 You may use these keys to manipulate the game:
 
  - `spacebar` to run/pause the game
  - `n` when paused, go to next generation
  - `q` quit
 
-Also you can start a map. This repo comes with some examples in `examples` directory.
-For example: `./play.sh examples/01.map`
+Also you can start a map. This repo comes with some examples in `example_maps` directory.
+For example: `./play.sh example_maps/01.map`
 
 ## Unit tests
 
